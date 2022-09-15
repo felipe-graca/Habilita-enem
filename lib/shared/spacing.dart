@@ -2,6 +2,7 @@ class Spacing {
   Spacing._();
 
   static const none = 0.0;
+  static const xxxs = 2.0;
   static const xxs = 4.0;
   static const xs = 8.0;
   static const s = 16.0;
@@ -10,4 +11,5 @@ class Spacing {
   static const xl = 48.0;
   static const xxl = 64.0;
   static const xxxl = 80.0;
+  static const xxxxl = 100.0;
 }
