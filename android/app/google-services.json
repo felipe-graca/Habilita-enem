@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "751857306179",
+    "project_id": "habilita-enem",
+    "storage_bucket": "habilita-enem.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751857306179:android:75e027e36c8916c07a22f6",
+        "android_client_info": {
+          "package_name": "com.gcapps.habilitaenem.habilita_enem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "751857306179-4i42l1uiv4l0b99bqhtjd6kgjr2vh750.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATE3Nc54Yk4OqPSlhTl1xLq_kCOhjXLN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "751857306179-4i42l1uiv4l0b99bqhtjd6kgjr2vh750.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
