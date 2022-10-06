@@ -5,18 +5,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habilita_enem/core/components/buttons.dart';
 import 'package:habilita_enem/core/components/custom_text_form_field.dart';
 import 'package:habilita_enem/core/routes/app_router.dart';
-import 'package:habilita_enem/pages/login/login_cubit.dart';
+import 'package:habilita_enem/pages/reset_password/reset_password_cubit.dart';
 import 'package:habilita_enem/shared/spacing.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class ResetPasswordPage extends StatefulWidget {
+  const ResetPasswordPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<ResetPasswordPage> createState() => _ResetPasswordPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final loginCubit = GetIt.I.get<LoginCubit>();
+class _ResetPasswordPageState extends State<ResetPasswordPage> {
+  final resetPassword = GetIt.I.get<ResetPasswordCubit>();
 
   @override
   void initState() {
@@ -35,8 +35,8 @@ class _LoginPageState extends State<LoginPage> {
             fit: BoxFit.cover,
           ),
         ),
-        child: BlocBuilder<LoginCubit, LoginState>(
-          bloc: loginCubit,
+        child: BlocBuilder<ResetPasswordCubit, ResetPasswordState>(
+          bloc: resetPassword,
           builder: (context, state) {
             return ListView(
               shrinkWrap: true,

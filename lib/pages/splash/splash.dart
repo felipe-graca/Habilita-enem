@@ -11,7 +11,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 4)).then(
+    Future.delayed(const Duration(seconds: 2)).then(
       (value) => {
         Navigator.of(context).pushNamedAndRemoveUntil(
           AppRouter.login,

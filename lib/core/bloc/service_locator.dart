@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:habilita_enem/pages/login/login_cubit.dart';
+import 'package:habilita_enem/pages/register/register_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ServiceLocator {
@@ -8,7 +9,7 @@ class ServiceLocator {
 
     i.registerSingleton(await SharedPreferences.getInstance());
     i.registerSingleton(LoginCubit());
-
+    i.registerSingleton(RegisterCubit());
     // global cubits
   }
 }
