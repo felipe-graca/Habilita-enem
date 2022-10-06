@@ -68,10 +68,14 @@ class _LoginPageState extends State<LoginPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        "Esqueceu sua senha?",
-                        style: GoogleFonts.lato(
-                          letterSpacing: 1.5,
+                      InkWell(
+                        onTap: () => Navigator.of(context)
+                            .pushNamed(AppRouter.resetPassword),
+                        child: Text(
+                          "Esqueceu sua senha?",
+                          style: GoogleFonts.lato(
+                            letterSpacing: 1.5,
+                          ),
                         ),
                       ),
                     ],
