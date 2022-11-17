@@ -5,11 +5,13 @@ import 'package:habilita_enem/shared/spacing.dart';
 class BasePage extends StatefulWidget {
   final String titlePage;
   final Widget body;
+  final Color backGroundColor;
 
   const BasePage({
     Key? key,
     required this.body,
     required this.titlePage,
+    this.backGroundColor = const Color(0xFFD9C1F0),
   }) : super(key: key);
 
   @override
@@ -75,6 +77,7 @@ class _BasePageState extends State<BasePage> {
                   child: SizedBox(
                     width: double.infinity,
                     child: RoundCurve(
+                      backGroundColor: widget.backGroundColor,
                       isMenuOpen: isMenuOpen,
                       body: widget.body,
                       height: height,
@@ -94,12 +97,14 @@ class RoundCurve extends StatefulWidget {
   final Widget body;
   final double height;
   final bool isMenuOpen;
+  final Color backGroundColor;
 
   const RoundCurve({
     Key? key,
     required this.body,
     required this.height,
     required this.isMenuOpen,
+    this.backGroundColor = const Color(0xFFD9C1F0),
   }) : super(key: key);
 
   @override
@@ -111,13 +116,14 @@ class RoundCurveState extends State<RoundCurve> {
   Widget build(BuildContext context) {
     final mediaHeight = MediaQuery.of(context).size.height;
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 350),
+      duration: const Duration(milliseconds: 800),
+      curve: Curves.easeInOut,
       height: mediaHeight - widget.height,
       padding:
           !widget.isMenuOpen ? const EdgeInsets.only(top: Spacing.xl) : null,
-      decoration: const BoxDecoration(
-        color: Color(0xFFD9C1F0),
-        boxShadow: [
+      decoration: BoxDecoration(
+        color: widget.backGroundColor,
+        boxShadow: const [
           BoxShadow(
             color: Colors.black,
             blurRadius: 15.0,
@@ -137,7 +143,7 @@ class RoundCurveState extends State<RoundCurve> {
             spreadRadius: 0,
           ),
         ],
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(41),
           topRight: Radius.circular(41),
         ),
@@ -146,99 +152,109 @@ class RoundCurveState extends State<RoundCurve> {
         children: [
           if (widget.isMenuOpen)
             Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Color(0XFFDBC7EE),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(41),
-                    topRight: Radius.circular(41),
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 800),
+                opacity: widget.height == 120 ? 0 : 1,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Color(0XFFDBC7EE),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(41),
+                      topRight: Radius.circular(41),
+                    ),
                   ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: Spacing.m),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 70,
-                        height: 70,
-                        child: LinearGradientMask(
-                          child: Image.asset(
-                            'assets/icons/profile_icon.png',
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: Spacing.s),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Mirella',
-                            style: GoogleFonts.roboto(
-                              fontSize: 28,
-                              fontWeight: FontWeight.w300,
-                              color: Colors.black,
-                              letterSpacing: 7.48,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: Spacing.m),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 70,
+                          height: 70,
+                          child: LinearGradientMask(
+                            child: Image.asset(
+                              'assets/icons/profile_icon.png',
                             ),
                           ),
-                          const SizedBox(height: Spacing.xxs),
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: LinearGradientMask(
-                                  child: Image.asset(
-                                    'assets/icons/points_icon.png',
+                        ),
+                        const SizedBox(width: Spacing.s),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Mirella',
+                              style: GoogleFonts.roboto(
+                                fontSize: 28,
+                                fontWeight: FontWeight.w300,
+                                color: Colors.black,
+                                letterSpacing: 7.48,
+                              ),
+                            ),
+                            const SizedBox(height: Spacing.xxs),
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: 20,
+                                  height: 20,
+                                  child: LinearGradientMask(
+                                    child: Image.asset(
+                                      'assets/icons/points_icon.png',
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(width: Spacing.xxs),
-                              Text(
-                                '1000',
-                                style: GoogleFonts.roboto(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w300,
-                                  color: Colors.black,
-                                  letterSpacing: 3.48,
+                                const SizedBox(width: Spacing.xxs),
+                                Text(
+                                  '1000',
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w300,
+                                    color: Colors.black,
+                                    letterSpacing: 3.48,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: Spacing.l),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              InkWell(
-                                onTap: () {},
-                                child: LinearGradientMask(
-                                  child: SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: LinearGradientMask(
-                                      child: Image.asset(
-                                        'assets/icons/logout_icon.png',
-                                        scale: 0.8,
+                              ],
+                            )
+                          ],
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: Spacing.l),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: () {},
+                                  child: LinearGradientMask(
+                                    child: SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                      child: LinearGradientMask(
+                                        child: Image.asset(
+                                          'assets/icons/logout_icon.png',
+                                          scale: 0.8,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
             )
           else
-            widget.body,
+            Expanded(
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 800),
+                opacity: !(widget.height == 120) ? 0 : 1,
+                child: widget.body,
+              ),
+            ),
         ],
       ),
     );
@@ -349,8 +365,9 @@ class HeaderMenuState extends State<HeaderMenu> {
               )
             ],
           ),
-          if (widget.isMenuOpen)
-            Expanded(
+          Expanded(
+            child: Visibility(
+              visible: widget.isMenuOpen,
               child: Column(
                 children: [
                   const SizedBox(height: Spacing.m),
@@ -415,6 +432,7 @@ class HeaderMenuState extends State<HeaderMenu> {
                 ],
               ),
             ),
+          ),
         ],
       ),
     );
