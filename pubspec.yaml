@@ -30,6 +30,11 @@ dependencies:
   image_picker: ^0.8.5+3
   modal_bottom_sheet: ^2.1.2
   google_fonts: ^3.0.1
+  vibration: 1.7.4-nullsafety.0
+  dio_cache_interceptor: 3.3.1
+  flutter_svg: ^1.1.6
+  dio_cache_interceptor_hive_store: ^3.2.0
+  keyboard_actions: 4.0.0
   # camera: 0.9.4+5
   # auto_size_text: ^3.0.0
   
@@ -45,6 +50,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

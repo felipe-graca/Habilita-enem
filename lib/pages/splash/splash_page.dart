@@ -1,9 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:habilita_enem/core/bloc/auth/auth_cubit.dart';
 import 'package:habilita_enem/core/routes/app_router.dart';
 import 'dart:math' as math;
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  final bool canNavigate;
+  const SplashPage({Key? key, required this.canNavigate}) : super(key: key);
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -12,6 +17,8 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  StreamSubscription<bool>? authSubscription;
+  final _authCubit = GetIt.I.get<AuthCubit>();
 
   @override
   void initState() {
@@ -20,21 +27,31 @@ class _SplashPageState extends State<SplashPage>
       duration: const Duration(seconds: 4),
     )..repeat();
 
-    Future.delayed(const Duration(seconds: 3)).then(
-      (value) => {
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          AppRouter.login,
-          (route) => false,
-        )
-      },
-    );
+    authSubscription = _authCubit.isLogged.listen((isLogged) {
+      handleNavigation(isLogged, _authCubit);
+    });
     super.initState();
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    authSubscription?.cancel();
     super.dispose();
+  }
+
+  void handleNavigation(bool isLogged, AuthCubit authCubit) {
+    Future.delayed(const Duration(seconds: 1)).then((_) async {
+      if (!mounted) {
+        return;
+      }
+      if (isLogged) {
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRouter.home, (Route<dynamic> route) => false);
+      } else {
+        Navigator.of(context).pushReplacementNamed(AppRouter.login);
+      }
+    });
   }
 
   @override

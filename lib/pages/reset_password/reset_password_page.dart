@@ -78,9 +78,13 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   ),
                 ),
                 const SizedBox(height: Spacing.xxxl),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: Spacing.l),
-                  child: PrimaryButton(text: 'Entrar'),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: Spacing.l),
+                  child: PrimaryButton(
+                    label: 'Entrar',
+                    onTap: () {},
+                    fullWidth: true,
+                  ),
                 ),
                 const SizedBox(height: Spacing.s),
                 Padding(

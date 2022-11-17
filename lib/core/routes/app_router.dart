@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:habilita_enem/pages/home/home_page.dart';
 import 'package:habilita_enem/pages/login/login_page.dart';
 import 'package:habilita_enem/pages/register/register_page.dart';
 import 'package:habilita_enem/pages/reset_password/reset_password_page.dart';
 import 'package:habilita_enem/pages/reset_password_code/reset_password_code_page.dart';
-import 'package:habilita_enem/pages/splash/splash.dart';
+import 'package:habilita_enem/pages/splash/splash_page.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class AppRouter {
@@ -12,6 +13,7 @@ class AppRouter {
   static const register = '/register';
   static const resetPassword = '/resetPassword';
   static const resetPasswordCode = '/resetPasswordCode';
+  static const home = '/auth/home';
 
   static MaterialWithModalsPageRoute<dynamic> generateRoute(
       RouteSettings routeSettings) {
@@ -22,7 +24,7 @@ class AppRouter {
     switch (routeSettings.name) {
       case '/':
       case splash:
-        page = const SplashPage();
+        page = const SplashPage(canNavigate: true);
         break;
       case login:
         page = const LoginPage();
@@ -35,6 +37,9 @@ class AppRouter {
         break;
       case resetPasswordCode:
         page = const ResetPasswordCodePage();
+        break;
+      case home:
+        page = const HomePage();
         break;
       default:
         page = Container();
