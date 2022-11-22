@@ -2,6 +2,7 @@ part of 'register_cubit.dart';
 
 class RegisterState extends Equatable {
   final EmailValidator email;
+  final TextValidator name;
   final PasswordValidator password;
   final ConfirmedPasswordValidator confirmedPassword;
   final FormzStatus status;
@@ -10,6 +11,7 @@ class RegisterState extends Equatable {
 
   const RegisterState({
     this.email = const EmailValidator.pure(),
+    this.name = const TextValidator.pure(),
     this.password = const PasswordValidator.pure(),
     this.confirmedPassword = const ConfirmedPasswordValidator.pure(),
     this.status = FormzStatus.pure,
@@ -20,6 +22,7 @@ class RegisterState extends Equatable {
   @override
   List<Object?> get props => [
         email,
+        name,
         password,
         confirmedPassword,
         status,
@@ -29,6 +32,7 @@ class RegisterState extends Equatable {
 
   RegisterState copyWith({
     EmailValidator? email,
+    TextValidator? name,
     PasswordValidator? password,
     ConfirmedPasswordValidator? confirmedPassword,
     FormzStatus? status,
@@ -37,6 +41,7 @@ class RegisterState extends Equatable {
   }) {
     return RegisterState(
       email: email ?? this.email,
+      name: name ?? this.name,
       password: password ?? this.password,
       confirmedPassword: confirmedPassword ?? this.confirmedPassword,
       status: status ?? this.status,

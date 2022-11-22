@@ -5,12 +5,10 @@ class AuthModel {
   final String id;
   final String email;
   final String password;
-  final String confirmedPassword;
   const AuthModel({
     this.id = '',
     this.email = '',
     this.password = '',
-    this.confirmedPassword = '',
   });
 
   AuthModel copyWith({
@@ -23,7 +21,6 @@ class AuthModel {
       id: id ?? this.id,
       email: email ?? this.email,
       password: password ?? this.password,
-      confirmedPassword: confirmedPassword ?? this.confirmedPassword,
     );
   }
 
@@ -32,7 +29,6 @@ class AuthModel {
       'id': id,
       'email': email,
       'password': password,
-      'confirmedPassword': confirmedPassword,
     };
   }
 
@@ -41,7 +37,6 @@ class AuthModel {
       id: map['id'] ?? '',
       email: map['email'] as String,
       password: map['password'] as String,
-      confirmedPassword: map['confirmedPassword'] as String,
     );
   }
 
@@ -57,23 +52,15 @@ class AuthModel {
       AuthModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() =>
-      'Auth( id: $id, email: $email, password: $password, confirmedPassword: $confirmedPassword)';
+  String toString() => 'Auth( id: $id, email: $email, password: $password)';
 
   @override
   bool operator ==(covariant AuthModel other) {
     if (identical(this, other)) return true;
 
-    return other.id == id &&
-        other.email == email &&
-        other.password == password &&
-        other.confirmedPassword == confirmedPassword;
+    return other.id == id && other.email == email && other.password == password;
   }
 
   @override
-  int get hashCode =>
-      id.hashCode ^
-      email.hashCode ^
-      password.hashCode ^
-      confirmedPassword.hashCode;
+  int get hashCode => id.hashCode ^ email.hashCode ^ password.hashCode;
 }

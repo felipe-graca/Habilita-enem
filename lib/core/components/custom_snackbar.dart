@@ -26,20 +26,16 @@ class CustomSnackBar {
     double marginBottom = 0.0,
     VoidCallback? onClosed,
   }) {
-    Color? bgColor;
     Color? contentColor;
     IconData? icon;
 
     if (status == CustomSnackbarStatus.success) {
-      bgColor = const Color.fromARGB(255, 97, 89, 89);
       contentColor = Colors.green.shade600;
       icon = Icons.check;
     } else if (status == CustomSnackbarStatus.warning) {
-      bgColor = Colors.white;
       icon = Icons.warning_amber;
       contentColor = Colors.yellow.shade600;
     } else if (status == CustomSnackbarStatus.error) {
-      bgColor = Colors.white;
       icon = Icons.close;
       contentColor = Colors.red.shade600;
     }

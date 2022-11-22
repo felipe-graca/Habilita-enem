@@ -41,16 +41,18 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> submit() async {
     try {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
-      final email = EmailValidator.dirty(state.email.value);
-      final password = PasswordValidator.dirty(state.password.value);
+      final authModel = AuthModel(
+        email: state.email.value,
+        password: state.password.value,
+      );
 
-      final authModel = AuthModel(email: email.value, password: password.value);
-
-      await _authRepository.signInFirebase(authModel);
-      emit(state.copyWith(status: FormzStatus.submissionSuccess));
-    } catch (_) {
-      emit(state.copyWith(status: FormzStatus.submissionFailure));
-    }
+      final result = await _authRepository.signInFirebase(authModel);
+      if (result) {
+        emit(state.copyWith(status: FormzStatus.submissionSuccess));
+        return;
+      }
+    } catch (_) {}
+    emit(state.copyWith(status: FormzStatus.submissionFailure));
   }
 
   bool validateForm() {

@@ -32,13 +32,17 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    super.initState();
-    authSubscription = authCubit.isLogged.listen((event) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      AppUI.checkSnackbarToDisplay(context: context, page: AppRouter.login);
+    });
+
+    authSubscription = authCubit.isLogged.listen((event) async {
       if (event) {
         Navigator.of(context).pushNamedAndRemoveUntil(
             AppRouter.home, (Route<dynamic> route) => false);
       }
     });
+    super.initState();
   }
 
   @override
@@ -144,12 +148,6 @@ class _LoginPageState extends State<LoginPage> {
                               status: CustomSnackbarStatus.success,
                               page: AppRouter.home,
                             ),
-                          );
-
-                          if (!mounted) return;
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                            AppRouter.home,
-                            (Route<dynamic> route) => false,
                           );
                         } else {
                           CustomSnackBar.show(

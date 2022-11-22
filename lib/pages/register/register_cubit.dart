@@ -6,6 +6,7 @@ import 'package:habilita_enem/core/models/auth_model.dart';
 import 'package:habilita_enem/core/models/form/confirmed_password_validator.dart';
 import 'package:habilita_enem/core/models/form/email_validator.dart';
 import 'package:habilita_enem/core/models/form/password_validator.dart';
+import 'package:habilita_enem/core/models/form/text_validator.dart';
 import 'package:habilita_enem/core/repository/auth/auth_repository_interface.dart';
 
 part 'register_state.dart';
@@ -25,6 +26,16 @@ class RegisterCubit extends Cubit<RegisterState> {
   void emailChanged(String value) {
     final email = EmailValidator.dirty(value.toLowerCase());
     emit(state.copyWith(email: email, status: Formz.validate([email])));
+  }
+
+  void nameChanged(String value) {
+    final name = TextValidator.dirty(value: value);
+    emit(
+      state.copyWith(
+        name: name,
+        status: Formz.validate([name]),
+      ),
+    );
   }
 
   void passwordChanged(String value) {

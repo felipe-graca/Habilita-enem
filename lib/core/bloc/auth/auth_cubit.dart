@@ -3,20 +3,20 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:habilita_enem/core/repository/auth/auth_repository_interface.dart';
-import 'package:habilita_enem/core/models/auth_model.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:get_it/get_it.dart';
+import 'package:habilita_enem/core/models/user_model.dart';
+import 'package:habilita_enem/core/repository/user/user_repository_interface.dart';
+import 'package:habilita_enem/pages/register/register_cubit.dart';
 
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  final IAuthRepository _authRepository;
+  final IUserRepository _userRepository;
 
   final _firebaseAuth = FirebaseAuth.instance;
-  final userDetails = BehaviorSubject<AuthModel>();
   var userDetailLoading = false;
 
-  AuthCubit(this._authRepository) : super(const AuthState()) {
+  AuthCubit(this._userRepository) : super(const AuthState()) {
     Future.delayed(const Duration(milliseconds: 500)).then((_) {
       _onUserChanged();
     });
@@ -53,14 +53,46 @@ class AuthCubit extends Cubit<AuthState> {
         return;
       }
 
-      emit(state.copyWith(
-        authModel: AuthModel(id: firebaseUser.uid),
-        status: AuthStatus.authenticated,
-      ));
+      final user = await _userRepository.getUser(id: firebaseUser.uid);
+
+      if (user != null) {
+        emit(state.copyWith(
+          userModel: UserModel(
+            id: user.id,
+            email: user.email,
+            points: user.points,
+            base64Image: user.base64Image,
+            name: user.name,
+          ),
+          status: AuthStatus.authenticated,
+        ));
+      } else {
+        final newUser = UserModel(
+          id: firebaseUser.uid,
+          email: firebaseUser.email!,
+          points: 0,
+          base64Image: '',
+          name: GetIt.I.get<RegisterCubit>().state.name.value,
+        );
+        emit(state.copyWith(
+          userModel: newUser,
+          status: AuthStatus.authenticated,
+        ));
+        await _userRepository.setUser(newUser);
+
+        final user = await _userRepository.getUser(id: newUser.id);
+
+        if (user != null) {
+          emit(state.copyWith(
+            userModel: user,
+            status: AuthStatus.authenticated,
+          ));
+        }
+      }
     } catch (_) {}
 
     userDetailLoading = false;
-    _isLoggedStream.add(state.authModel.isNotEmpty);
+    _isLoggedStream.add(state.userModel.isNotEmpty);
   }
 
   @override
@@ -71,7 +103,6 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> logout() async {
     try {
       await _firebaseAuth.signOut();
-      userDetails.sink.add(const AuthModel());
     } catch (_) {}
   }
 
@@ -85,5 +116,5 @@ class AuthCubit extends Cubit<AuthState> {
     return token;
   }
 
-  AuthModel get currentUser => state.authModel;
+  UserModel get currentUser => state.userModel;
 }

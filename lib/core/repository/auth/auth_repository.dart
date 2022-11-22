@@ -18,17 +18,15 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<void> signInFirebase(AuthModel authModel) async {
+  Future<bool> signInFirebase(AuthModel authModel) async {
     try {
-      final result = await _firebaseAuth.signInWithEmailAndPassword(
+      await _firebaseAuth.signInWithEmailAndPassword(
         email: authModel.email,
         password: authModel.password,
       );
-      print(result);
-    } on FirebaseAuthException catch (e, _) {
-      throw LogInWithEmailAndPasswordFailure.fromCode(e.code);
+      return true;
     } catch (_) {
-      throw const LogInWithEmailAndPasswordFailure();
+      return false;
     }
   }
 

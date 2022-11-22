@@ -4,26 +4,26 @@ enum AuthStatus { authenticated, unauthenticated }
 
 class AuthState extends Equatable {
   final AuthStatus status;
-  final AuthModel authModel;
+  final UserModel userModel;
 
   const AuthState({
     this.status = AuthStatus.unauthenticated,
-    this.authModel = AuthModel.empty,
+    this.userModel = UserModel.empty,
   });
 
   bool get isLogged => status == AuthStatus.authenticated;
 
   @override
-  List<Object> get props => [status, authModel];
+  List<Object> get props => [status, userModel];
 
   AuthState copyWith({
     AuthStatus? status,
-    AuthModel? authModel,
+    UserModel? userModel,
     String? orgId,
   }) {
     return AuthState(
       status: status ?? this.status,
-      authModel: authModel ?? this.authModel,
+      userModel: userModel ?? this.userModel,
     );
   }
 }

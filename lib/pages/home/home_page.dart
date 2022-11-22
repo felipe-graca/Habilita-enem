@@ -18,15 +18,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late final StreamSubscription authSubscription;
 
-  final authBloc = GetIt.I.get<AuthCubit>();
+  final authCubit = GetIt.I.get<AuthCubit>();
 
   @override
   void initState() {
-    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       AppUI.checkSnackbarToDisplay(context: context, page: AppRouter.home);
 
-      authSubscription = authBloc.isLogged.listen((event) {
+      authSubscription = authCubit.isLogged.listen((event) async {
         if (!event) {
           Navigator.of(context).pushReplacementNamed(
             AppRouter.login,
@@ -34,6 +33,7 @@ class _HomePageState extends State<HomePage> {
         }
       });
     });
+    super.initState();
   }
 
   @override

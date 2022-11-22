@@ -21,6 +21,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final registerCubit = GetIt.I.get<RegisterCubit>();
 
   final emailFocus = FocusNode();
+  final nameFocus = FocusNode();
   final passwordFocus = FocusNode();
   final confirmPasswordFocus = FocusNode();
 
@@ -33,6 +34,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   void dispose() {
     emailFocus.dispose();
+    nameFocus.dispose();
     passwordFocus.dispose();
     confirmPasswordFocus.dispose();
     super.dispose();
@@ -55,6 +57,7 @@ class _RegisterPageState extends State<RegisterPage> {
             return CustomKeyboardActions(
               nodes: [
                 emailFocus,
+                nameFocus,
                 passwordFocus,
                 confirmPasswordFocus,
               ],
@@ -85,7 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     width: 250,
                     height: 250,
                   ),
-                  const SizedBox(height: Spacing.xxxl),
+                  const SizedBox(height: Spacing.m),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: Spacing.l),
                     child: CustomTextFormField(
@@ -96,6 +99,22 @@ class _RegisterPageState extends State<RegisterPage> {
                       hasError: !state.email.valid,
                       errorMessage: 'E-mail inválido',
                       focusNode: emailFocus,
+                      wasSubmitted: state.wasSubmitted,
+                    ),
+                  ),
+                  const SizedBox(height: Spacing.m),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: Spacing.l),
+                    child: CustomTextFormField(
+                      label: 'Nome ou apelido',
+                      onChanged: (value) {
+                        registerCubit.nameChanged(value);
+                      },
+                      hasError: state.password.invalid,
+                      errorMessage: state.errorMessage.isNotEmpty
+                          ? state.errorMessage
+                          : 'Nome invalido',
+                      focusNode: nameFocus,
                       wasSubmitted: state.wasSubmitted,
                     ),
                   ),

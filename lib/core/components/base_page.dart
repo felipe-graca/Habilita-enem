@@ -185,13 +185,19 @@ class RoundCurveState extends State<RoundCurve> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Mirella',
+                              GetIt.I
+                                  .get<AuthCubit>()
+                                  .currentUser
+                                  .name
+                                  .toUpperCase()
+                                  .substring(0, 6),
                               style: GoogleFonts.roboto(
                                 fontSize: 28,
                                 fontWeight: FontWeight.w300,
                                 color: Colors.black,
-                                letterSpacing: 7.48,
+                                letterSpacing: 2.48,
                               ),
+                              maxLines: 1,
                             ),
                             const SizedBox(height: Spacing.xxs),
                             Row(
@@ -207,7 +213,11 @@ class RoundCurveState extends State<RoundCurve> {
                                 ),
                                 const SizedBox(width: Spacing.xxs),
                                 Text(
-                                  '1000',
+                                  GetIt.I
+                                      .get<AuthCubit>()
+                                      .currentUser
+                                      .points
+                                      .toString(),
                                   style: GoogleFonts.roboto(
                                     fontSize: 24,
                                     fontWeight: FontWeight.w300,
@@ -317,7 +327,7 @@ class HeaderMenuState extends State<HeaderMenu> {
       'iconAsset': 'assets/icons/home_icon.png',
     },
     {
-      'title': 'PONTOS',
+      'title': 'RANKING',
       'iconAsset': 'assets/icons/points_icon.png',
     },
     {
