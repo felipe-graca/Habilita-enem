@@ -28,7 +28,7 @@ class ServiceLocator {
     // page cubits
     i.registerLazySingleton(() => AuthCubit(i.get()));
     i.registerLazySingleton<IAuthRepository>(() => AuthRepository());
-    i.registerLazySingleton(() => LoginCubit());
+    i.registerLazySingleton(() => LoginCubit(i.get(), i.get()));
     i.registerLazySingleton(() => RegisterCubit(i.get(), i.get()));
     i.registerLazySingleton(() => ResetPasswordCubit());
     i.registerLazySingleton(() => ResetPasswordCodeCubit());

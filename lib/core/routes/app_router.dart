@@ -17,7 +17,7 @@ class AppRouter {
 
   static MaterialWithModalsPageRoute<dynamic> generateRoute(
       RouteSettings routeSettings) {
-    // final args = routeSettings.arguments as Map<String, dynamic>?;
+    final args = routeSettings.arguments as Map<String, dynamic>?;
 
     late final Widget page;
 

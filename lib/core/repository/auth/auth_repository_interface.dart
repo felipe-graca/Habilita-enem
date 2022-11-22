@@ -4,7 +4,7 @@ abstract class IAuthRepository {
   Future<String>? getUserToken();
   String? getUid();
 
-  Future<void> signInFirebase(String email, String password);
+  Future<void> signInFirebase(AuthModel authModel);
 
   Future<bool> createFirebaseUser(AuthModel authModel);
 

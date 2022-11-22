@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habilita_enem/shared/componentes/base_page.dart';
+import 'package:habilita_enem/core/components/base_page.dart';
 import 'package:habilita_enem/shared/spacing.dart';
 
 class CustomRanking extends StatelessWidget {
@@ -8,6 +8,7 @@ class CustomRanking extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     const gradient = LinearGradient(
       begin: Alignment.centerLeft,
       end: Alignment.centerRight,
@@ -21,7 +22,7 @@ class CustomRanking extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            right: 65,
+            right: (size.width / 2) + 35,
             top: 90,
             child: Column(
               children: [
@@ -114,7 +115,7 @@ class CustomRanking extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: 65,
+            left: (size.width / 2) + 35,
             top: 90,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

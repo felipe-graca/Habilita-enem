@@ -18,8 +18,12 @@ class RegisterCubit extends Cubit<RegisterState> {
     this._authCubit,
   ) : super(const RegisterState());
 
+  void init() {
+    emit(const RegisterState());
+  }
+
   void emailChanged(String value) {
-    final email = EmailValidator.dirty(value);
+    final email = EmailValidator.dirty(value.toLowerCase());
     emit(state.copyWith(email: email, status: Formz.validate([email])));
   }
 
@@ -45,6 +49,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   Future<void> submit() async {
     try {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
+
       final authModel = AuthModel(
         email: state.email.value,
         password: state.password.value,
@@ -58,7 +63,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   bool validateForm() {
-    final email = EmailValidator.dirty(state.email.value);
+    final email = EmailValidator.dirty(state.email.value.trim());
     final password = PasswordValidator.dirty(state.password.value);
     final confirmedPassword = ConfirmedPasswordValidator.dirty(
       password: state.password.value,

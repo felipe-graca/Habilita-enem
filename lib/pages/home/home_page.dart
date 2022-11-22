@@ -1,6 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:habilita_enem/core/bloc/auth/auth_cubit.dart';
+import 'package:habilita_enem/core/helpers/app_ui.dart';
 import 'package:habilita_enem/core/components/custom_ranking.dart';
-import 'package:habilita_enem/shared/componentes/base_page.dart';
+import 'package:habilita_enem/core/components/base_page.dart';
+import 'package:habilita_enem/core/routes/app_router.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,6 +16,32 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late final StreamSubscription authSubscription;
+
+  final authBloc = GetIt.I.get<AuthCubit>();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      AppUI.checkSnackbarToDisplay(context: context, page: AppRouter.home);
+
+      authSubscription = authBloc.isLogged.listen((event) {
+        if (!event) {
+          Navigator.of(context).pushReplacementNamed(
+            AppRouter.login,
+          );
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    authSubscription.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BasePage(

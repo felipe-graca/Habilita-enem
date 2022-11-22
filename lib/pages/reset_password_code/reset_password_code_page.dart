@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habilita_enem/core/components/buttons.dart';
+import 'package:habilita_enem/core/components/custom_buttons.dart';
 import 'package:habilita_enem/core/components/custom_text_form_field.dart';
 import 'package:habilita_enem/core/routes/app_router.dart';
 import 'package:habilita_enem/pages/reset_password_code/reset_password_code_cubit.dart';
@@ -80,7 +80,7 @@ class _ResetPasswordCodePageState extends State<ResetPasswordCodePage> {
                 const SizedBox(height: Spacing.xxxl),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: Spacing.l),
-                  child: PrimaryButton(
+                  child: CustomPrimaryButton(
                     label: 'Entrar',
                     fullWidth: true,
                     onTap: () {},
