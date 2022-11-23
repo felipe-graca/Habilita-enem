@@ -47,7 +47,7 @@ class _SplashPageState extends State<SplashPage>
       }
       if (isLogged) {
         Navigator.of(context).pushNamedAndRemoveUntil(
-            AppRouter.home, (Route<dynamic> route) => false);
+            AppRouter.base, (Route<dynamic> route) => false);
       } else {
         Navigator.of(context).pushReplacementNamed(AppRouter.login);
       }

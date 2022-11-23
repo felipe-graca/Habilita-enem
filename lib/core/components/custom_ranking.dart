@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habilita_enem/core/components/base_page.dart';
+import 'package:habilita_enem/core/components/base_page/base_page.dart';
 import 'package:habilita_enem/shared/spacing.dart';
 
 class CustomRanking extends StatelessWidget {

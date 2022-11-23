@@ -39,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
     authSubscription = authCubit.isLogged.listen((event) async {
       if (event) {
         Navigator.of(context).pushNamedAndRemoveUntil(
-            AppRouter.home, (Route<dynamic> route) => false);
+            AppRouter.base, (Route<dynamic> route) => false);
       }
     });
     super.initState();
@@ -146,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                             SnackbarToDisplayModel(
                               text: 'Login efetuado com sucesso',
                               status: CustomSnackbarStatus.success,
-                              page: AppRouter.home,
+                              page: AppRouter.base,
                             ),
                           );
                         } else {

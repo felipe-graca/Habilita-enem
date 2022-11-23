@@ -74,7 +74,6 @@ class _RegisterPageState extends State<RegisterPage> {
                             Navigator.of(context).pop();
                           },
                           child: const Icon(
-                            size: 35,
                             Icons.arrow_back_outlined,
                             color: Colors.white,
                           ),
@@ -165,12 +164,12 @@ class _RegisterPageState extends State<RegisterPage> {
                               .add(SnackbarToDisplayModel(
                             text: 'Cadastrar efetuado com sucesso',
                             status: CustomSnackbarStatus.success,
-                            page: AppRouter.home,
+                            page: AppRouter.base,
                           ));
 
                           if (!mounted) return;
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                              AppRouter.home, (Route<dynamic> route) => false);
+                              AppRouter.base, (Route<dynamic> route) => false);
                         } else {
                           CustomSnackBar.show(
                             text: 'Erro ao efetuar o Cadastrar',

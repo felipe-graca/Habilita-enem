@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habilita_enem/pages/home/home_page.dart';
+import 'package:habilita_enem/core/components/base_page/base_page.dart';
 import 'package:habilita_enem/pages/login/login_page.dart';
 import 'package:habilita_enem/pages/register/register_page.dart';
 import 'package:habilita_enem/pages/reset_password/reset_password_page.dart';
@@ -13,7 +13,7 @@ class AppRouter {
   static const register = '/register';
   static const resetPassword = '/resetPassword';
   static const resetPasswordCode = '/resetPasswordCode';
-  static const home = '/auth/home';
+  static const base = '/auth/base';
 
   static MaterialWithModalsPageRoute<dynamic> generateRoute(
       RouteSettings routeSettings) {
@@ -38,8 +38,8 @@ class AppRouter {
       case resetPasswordCode:
         page = const ResetPasswordCodePage();
         break;
-      case home:
-        page = const HomePage();
+      case base:
+        page = BasePage();
         break;
       default:
         page = Container();

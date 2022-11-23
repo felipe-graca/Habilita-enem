@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:habilita_enem/core/bloc/auth/auth_cubit.dart';
 import 'package:habilita_enem/core/helpers/app_ui.dart';
-import 'package:habilita_enem/core/components/custom_ranking.dart';
-import 'package:habilita_enem/core/components/base_page.dart';
 import 'package:habilita_enem/core/routes/app_router.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      AppUI.checkSnackbarToDisplay(context: context, page: AppRouter.home);
+      AppUI.checkSnackbarToDisplay(context: context, page: AppRouter.base);
 
       authSubscription = authCubit.isLogged.listen((event) async {
         if (!event) {
@@ -44,14 +42,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BasePage(
-      titlePage: 'INICIO',
-      body: ListView(
-        shrinkWrap: true,
-        children: const [
-          CustomRanking(),
-        ],
-      ),
-    );
+    return Container();
   }
 }
