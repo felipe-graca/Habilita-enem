@@ -9,15 +9,25 @@ class QuestionModel {
   final String dResult;
   final String eResult;
   final String result;
-  QuestionModel({
-    required this.text,
-    required this.aResult,
-    required this.bResult,
-    required this.cResult,
-    required this.dResult,
-    required this.eResult,
-    required this.result,
+  const QuestionModel({
+    this.text = '',
+    this.aResult = '',
+    this.bResult = '',
+    this.cResult = '',
+    this.dResult = '',
+    this.eResult = '',
+    this.result = '',
   });
+
+  static const empty = QuestionModel();
+  get isEmpty =>
+      text.isEmpty ||
+      aResult.isEmpty ||
+      bResult.isEmpty ||
+      cResult.isEmpty ||
+      dResult.isEmpty ||
+      eResult.isEmpty ||
+      result.isEmpty;
 
   QuestionModel copyWith({
     String? text,

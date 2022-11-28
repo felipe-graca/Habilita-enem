@@ -12,10 +12,14 @@ import 'package:habilita_enem/core/service/http/http_service.dart';
 import 'package:habilita_enem/core/service/http/http_service_interface.dart';
 import 'package:habilita_enem/core/service/storage/storage_service.dart';
 import 'package:habilita_enem/core/service/storage/storage_service_interface.dart';
+import 'package:habilita_enem/pages/history/history_cubit.dart';
 import 'package:habilita_enem/pages/login/login_cubit.dart';
+import 'package:habilita_enem/pages/profile/profile_cubit.dart';
 import 'package:habilita_enem/pages/quiz/quiz_cubit.dart';
+import 'package:habilita_enem/pages/ranking/ranking_cubit.dart';
 import 'package:habilita_enem/pages/register/register_cubit.dart';
 import 'package:habilita_enem/pages/reset_password/reset_password_cubit.dart';
+import 'package:habilita_enem/pages/settings/settings_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../pages/reset_password_code/reset_password_code_cubit.dart';
@@ -45,6 +49,10 @@ class ServiceLocator {
     i.registerLazySingleton(() => RegisterCubit(i.get(), i.get()));
     i.registerLazySingleton(() => ResetPasswordCubit());
     i.registerLazySingleton(() => ResetPasswordCodeCubit());
-    i.registerLazySingleton(() => QuizCubit(i.get()));
+    i.registerLazySingleton(() => QuizCubit(i.get(), i.get()));
+    i.registerLazySingleton(() => HistoryCubit(i.get()));
+    i.registerLazySingleton(() => SettingsCubit());
+    i.registerLazySingleton(() => ProfileCubit(i.get()));
+    i.registerLazySingleton(() => RankingCubit(i.get()));
   }
 }

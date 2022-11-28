@@ -4,8 +4,11 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:habilita_enem/core/components/custom_snackbar.dart';
+import 'package:habilita_enem/core/helpers/app_ui.dart';
 import 'package:habilita_enem/core/models/user_model.dart';
 import 'package:habilita_enem/core/repository/user/user_repository_interface.dart';
+import 'package:habilita_enem/core/routes/app_router.dart';
 import 'package:habilita_enem/pages/register/register_cubit.dart';
 
 part 'auth_state.dart';
@@ -103,7 +106,20 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> logout() async {
     try {
       await _firebaseAuth.signOut();
+      AppUI.snackbarsToDisplayWhenStart.add(SnackbarToDisplayModel(
+        text: 'Volte sempre!',
+        status: CustomSnackbarStatus.success,
+        page: AppRouter.login,
+      ));
     } catch (_) {}
+  }
+
+  void updateCurrentUserName(String name) {
+    emit(state.copyWith(userModel: state.userModel.copyWith(name: name)));
+  }
+
+  void updateCurrentUserPoints(int points) {
+    emit(state.copyWith(userModel: state.userModel.copyWith(points: points)));
   }
 
   Future<String?> getToken() async {

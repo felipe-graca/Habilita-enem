@@ -18,6 +18,8 @@ class BaseCubit extends Cubit<BaseState> {
   late StreamSubscription authSubscription;
 
   void init(BuildContext context) {
+    emit(const BaseState());
+
     pageController = PageController(initialPage: 0);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {

@@ -6,7 +6,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habilita_enem/core/bloc/auth/auth_cubit.dart';
 import 'package:habilita_enem/core/components/base_page/base_cubit.dart';
 import 'package:habilita_enem/core/routes/app_router.dart';
+import 'package:habilita_enem/pages/history/history_page.dart';
+import 'package:habilita_enem/pages/home/home_page.dart';
 import 'package:habilita_enem/pages/quiz/quiz_page.dart';
+import 'package:habilita_enem/pages/ranking/ranking_page.dart';
+import 'package:habilita_enem/shared/componentes/linear_gradient.dart';
 import 'package:habilita_enem/shared/spacing.dart';
 
 class BasePage extends StatelessWidget {
@@ -77,10 +81,10 @@ class __BodyState extends State<_Body> with AutomaticKeepAliveClientMixin {
     final mediaHeight = MediaQuery.of(context).size.height;
 
     final pages = <Widget>[
+      const HomePage(),
       const QuizPage(),
-      const QuizPage(),
-      const QuizPage(),
-      const QuizPage(),
+      const RankingPage(),
+      const HistoryPage(),
     ];
 
     return Align(
@@ -89,12 +93,10 @@ class __BodyState extends State<_Body> with AutomaticKeepAliveClientMixin {
         bloc: baseCubit,
         builder: (context, state) {
           return AnimatedContainer(
-            duration: const Duration(milliseconds: 800),
+            duration: const Duration(milliseconds: 500),
             curve: Curves.easeInOut,
             height: mediaHeight - state.heightPage,
-            padding: state.menuIsOpen
-                ? EdgeInsets.zero
-                : const EdgeInsets.only(top: Spacing.xl),
+            padding: EdgeInsets.zero,
             decoration: const BoxDecoration(
               color: Color(0xFFD9C1F0),
               boxShadow: [
@@ -118,20 +120,27 @@ class __BodyState extends State<_Body> with AutomaticKeepAliveClientMixin {
                 ),
               ],
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(41),
-                topRight: Radius.circular(41),
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
               ),
             ),
             child: Stack(
               children: [
-                SizedBox(
-                  width: double.maxFinite,
-                  child: ExpandablePageView.builder(
-                    itemCount: pages.length,
-                    controller: baseCubit.pageController,
-                    itemBuilder: (context, index) {
-                      return pages[index];
-                    },
+                AnimatedOpacity(
+                  duration: const Duration(milliseconds: 800),
+                  opacity: state.heightPage == 120 ? 1 : 0,
+                  child: SizedBox(
+                    width: double.maxFinite,
+                    child: ExpandablePageView.builder(
+                      itemCount: pages.length,
+                      physics: const NeverScrollableScrollPhysics(
+                          parent: AlwaysScrollableScrollPhysics()),
+                      scrollDirection: Axis.vertical,
+                      controller: baseCubit.pageController,
+                      itemBuilder: (context, index) {
+                        return pages[index];
+                      },
+                    ),
                   ),
                 ),
                 Align(
@@ -163,54 +172,51 @@ class __BodyState extends State<_Body> with AutomaticKeepAliveClientMixin {
                                 ),
                               ),
                               const SizedBox(width: Spacing.s),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    GetIt.I
-                                        .get<AuthCubit>()
-                                        .currentUser
-                                        .name
-                                        .toUpperCase()
-                                        .substring(0, 6),
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.w300,
-                                      color: Colors.black,
-                                      letterSpacing: 2.48,
-                                    ),
-                                    maxLines: 1,
-                                  ),
-                                  const SizedBox(height: Spacing.xxs),
-                                  Row(
+                              BlocBuilder<AuthCubit, AuthState>(
+                                bloc: GetIt.I.get<AuthCubit>(),
+                                builder: (context, state) {
+                                  return Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      SizedBox(
-                                        width: 20,
-                                        height: 20,
-                                        child: LinearGradientMask(
-                                          child: Image.asset(
-                                            'assets/icons/points_icon.png',
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: Spacing.xxs),
                                       Text(
-                                        GetIt.I
-                                            .get<AuthCubit>()
-                                            .currentUser
-                                            .points
-                                            .toString(),
+                                        state.userModel.name.toUpperCase(),
                                         style: GoogleFonts.roboto(
-                                          fontSize: 24,
+                                          fontSize: 28,
                                           fontWeight: FontWeight.w300,
                                           color: Colors.black,
-                                          letterSpacing: 3.48,
+                                          letterSpacing: 2.48,
                                         ),
+                                        maxLines: 1,
                                       ),
+                                      const SizedBox(height: Spacing.xxs),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 20,
+                                            height: 20,
+                                            child: LinearGradientMask(
+                                              child: Image.asset(
+                                                'assets/icons/points_icon.png',
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(width: Spacing.xxs),
+                                          Text(
+                                            state.userModel.points.toString(),
+                                            style: GoogleFonts.roboto(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.w300,
+                                              color: Colors.black,
+                                              letterSpacing: 3.48,
+                                            ),
+                                          ),
+                                        ],
+                                      )
                                     ],
-                                  )
-                                ],
+                                  );
+                                },
                               ),
                               Expanded(
                                 child: Padding(
@@ -221,26 +227,11 @@ class __BodyState extends State<_Body> with AutomaticKeepAliveClientMixin {
                                     children: [
                                       InkWell(
                                         onTap: () async {
-                                          await GetIt.I<AuthCubit>().logout();
-
-                                          navigator.pushNamedAndRemoveUntil(
-                                            AppRouter.login,
-                                            ModalRoute.withName(
-                                                AppRouter.login),
-                                          );
+                                          navigator
+                                              .pushNamed(AppRouter.settings);
                                         },
-                                        child: LinearGradientMask(
-                                          child: SizedBox(
-                                            width: 50,
-                                            height: 50,
-                                            child: LinearGradientMask(
-                                              child: Image.asset(
-                                                'assets/icons/logout_icon.png',
-                                                scale: 0.8,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                        child: const Icon(Icons.settings,
+                                            size: 40),
                                       ),
                                     ],
                                   ),
@@ -265,28 +256,6 @@ class __BodyState extends State<_Body> with AutomaticKeepAliveClientMixin {
   bool get wantKeepAlive => true;
 }
 
-class LinearGradientMask extends StatelessWidget {
-  const LinearGradientMask({super.key, required this.child});
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return ShaderMask(
-      shaderCallback: (bounds) {
-        return const LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-          colors: [
-            Color(0xFF17A6D7),
-            Color(0xFF9D31FE),
-          ],
-        ).createShader(bounds);
-      },
-      child: child,
-    );
-  }
-}
-
 class HeaderMenu extends StatelessWidget {
   final Function()? onTap;
 
@@ -303,12 +272,12 @@ class HeaderMenu extends StatelessWidget {
       'iconAsset': 'assets/icons/home_icon.png',
     },
     {
-      'title': 'RANKING',
-      'iconAsset': 'assets/icons/points_icon.png',
-    },
-    {
       'title': 'QUIZ',
       'iconAsset': 'assets/icons/quiz_icon.png',
+    },
+    {
+      'title': 'RANKING',
+      'iconAsset': 'assets/icons/points_icon.png',
     },
     {
       'title': 'HISTORICO',

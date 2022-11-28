@@ -1,10 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:habilita_enem/core/bloc/auth/auth_cubit.dart';
-import 'package:habilita_enem/core/helpers/app_ui.dart';
-import 'package:habilita_enem/core/routes/app_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:habilita_enem/shared/spacing.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,34 +10,52 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late final StreamSubscription authSubscription;
-
-  final authCubit = GetIt.I.get<AuthCubit>();
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      AppUI.checkSnackbarToDisplay(context: context, page: AppRouter.base);
-
-      authSubscription = authCubit.isLogged.listen((event) async {
-        if (!event) {
-          Navigator.of(context).pushReplacementNamed(
-            AppRouter.login,
-          );
-        }
-      });
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    authSubscription.cancel();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final width = MediaQuery.of(context).size.width;
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Image.asset(
+            'assets/images/home.png',
+            scale: 1.3,
+          ),
+          const SizedBox(height: Spacing.l),
+          SizedBox(
+            width: width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: Spacing.xxl),
+                Text(
+                  'Bem vindo!',
+                  style: GoogleFonts.lato(
+                    fontSize: 25,
+                    letterSpacing: 5.4,
+                    color: const Color(0xFF4D444F),
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                const SizedBox(height: Spacing.l),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: Spacing.m),
+                  child: Text(
+                    'Organize seus estudos e melhore o seu desempenho',
+                    style: GoogleFonts.lato(
+                      fontSize: 25,
+                      letterSpacing: 5.4,
+                      color: const Color(0xFF4D444F),
+                      fontWeight: FontWeight.w300,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

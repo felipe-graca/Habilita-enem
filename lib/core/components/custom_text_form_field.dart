@@ -133,6 +133,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                         widgetSize = size;
                       },
                       child: TextFormField(
+                        enabled: !widget.isDisabled,
                         onChanged: widget.onChanged,
                         initialValue: widget.initialValue,
                         controller: widget.controller,

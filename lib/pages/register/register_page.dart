@@ -105,14 +105,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: Spacing.l),
                     child: CustomTextFormField(
-                      label: 'Nome ou apelido',
+                      label: 'Primeiro nome',
                       onChanged: (value) {
                         registerCubit.nameChanged(value);
                       },
                       hasError: state.password.invalid,
                       errorMessage: state.errorMessage.isNotEmpty
                           ? state.errorMessage
-                          : 'Nome invalido',
+                          : 'nome inválido',
                       focusNode: nameFocus,
                       wasSubmitted: state.wasSubmitted,
                     ),

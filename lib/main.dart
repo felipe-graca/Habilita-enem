@@ -6,14 +6,6 @@ import 'package:habilita_enem/core/bloc/service_locator.dart';
 import 'package:habilita_enem/core/routes/app_router.dart';
 import 'package:habilita_enem/firebase/firebase_options.dart';
 
-Future<void> initializeServices() async {
-  //initialize service injection
-  await ServiceLocator.setup();
-
-  //initialize getIt
-  await GetIt.I.allReady();
-}
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -33,6 +25,14 @@ void main() async {
       },
     ),
   );
+}
+
+Future<void> initializeServices() async {
+  //initialize service injection
+  await ServiceLocator.setup();
+
+  //initialize getIt
+  await GetIt.I.allReady();
 }
 
 class MyApp extends StatefulWidget {

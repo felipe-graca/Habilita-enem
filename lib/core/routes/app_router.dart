@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:habilita_enem/core/components/base_page/base_page.dart';
 import 'package:habilita_enem/pages/login/login_page.dart';
+import 'package:habilita_enem/pages/profile/profile_page.dart';
 import 'package:habilita_enem/pages/register/register_page.dart';
 import 'package:habilita_enem/pages/reset_password/reset_password_page.dart';
 import 'package:habilita_enem/pages/reset_password_code/reset_password_code_page.dart';
+import 'package:habilita_enem/pages/settings/settings_page.dart';
 import 'package:habilita_enem/pages/splash/splash_page.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -14,6 +16,8 @@ class AppRouter {
   static const resetPassword = '/resetPassword';
   static const resetPasswordCode = '/resetPasswordCode';
   static const base = '/auth/base';
+  static const settings = '/auth/settings';
+  static const profile = '/auth/profile';
 
   static MaterialWithModalsPageRoute<dynamic> generateRoute(
       RouteSettings routeSettings) {
@@ -40,6 +44,12 @@ class AppRouter {
         break;
       case base:
         page = BasePage();
+        break;
+      case settings:
+        page = const SettingsPage();
+        break;
+      case profile:
+        page = const ProfilePage();
         break;
       default:
         page = Container();
