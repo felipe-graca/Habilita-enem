@@ -7,7 +7,6 @@ import 'package:habilita_enem/pages/reset_password/reset_password_page.dart';
 import 'package:habilita_enem/pages/reset_password_code/reset_password_code_page.dart';
 import 'package:habilita_enem/pages/settings/settings_page.dart';
 import 'package:habilita_enem/pages/splash/splash_page.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class AppRouter {
   static const splash = '/splash';
@@ -19,8 +18,7 @@ class AppRouter {
   static const settings = '/auth/settings';
   static const profile = '/auth/profile';
 
-  static MaterialWithModalsPageRoute<dynamic> generateRoute(
-      RouteSettings routeSettings) {
+  static MaterialPageRoute<dynamic> generateRoute(RouteSettings routeSettings) {
     // final args = routeSettings.arguments as Map<String, dynamic>?;
 
     late final Widget page;
@@ -54,7 +52,7 @@ class AppRouter {
       default:
         page = Container();
     }
-    return MaterialWithModalsPageRoute(
+    return MaterialPageRoute(
       builder: (_) => page,
       settings: routeSettings,
     );

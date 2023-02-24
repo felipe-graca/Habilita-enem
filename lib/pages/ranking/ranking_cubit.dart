@@ -43,10 +43,13 @@ class RankingCubit extends Cubit<RankingState> {
 
     userPoints.removeWhere((element) => element == third.points);
 
+    users.sort((a, b) => a.points.compareTo(b.points));
+
     emit(state.copyWith(
       first: frist,
       second: second,
       third: third,
+      users: [...users.reversed],
     ));
   }
 }
