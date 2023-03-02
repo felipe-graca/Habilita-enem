@@ -4,15 +4,18 @@ import 'package:habilita_enem/core/bloc/auth/auth_cubit.dart';
 import 'package:habilita_enem/core/components/base_page/base_cubit.dart';
 import 'package:habilita_enem/core/repository/auth/auth_repository.dart';
 import 'package:habilita_enem/core/repository/auth/auth_repository_interface.dart';
+import 'package:habilita_enem/core/repository/news/news_repository.dart';
+import 'package:habilita_enem/core/repository/news/news_repository_interface.dart';
 import 'package:habilita_enem/core/repository/questions/questions_repository.dart';
 import 'package:habilita_enem/core/repository/questions/questions_repository_interface.dart';
 import 'package:habilita_enem/core/repository/user/user_repository.dart';
 import 'package:habilita_enem/core/repository/user/user_repository_interface.dart';
-import 'package:habilita_enem/core/service/http/http_service.dart';
-import 'package:habilita_enem/core/service/http/http_service_interface.dart';
+import 'package:habilita_enem/core/service/http_service/http_service_interface.dart';
+import 'package:habilita_enem/core/service/http_service/http_servie.dart';
 import 'package:habilita_enem/core/service/storage/storage_service.dart';
 import 'package:habilita_enem/core/service/storage/storage_service_interface.dart';
 import 'package:habilita_enem/pages/history/history_cubit.dart';
+import 'package:habilita_enem/pages/home/home_cubit.dart';
 import 'package:habilita_enem/pages/login/login_cubit.dart';
 import 'package:habilita_enem/pages/profile/profile_cubit.dart';
 import 'package:habilita_enem/pages/quiz/quiz_cubit.dart';
@@ -33,16 +36,16 @@ class ServiceLocator {
     // global cubits
     i.registerLazySingleton(() => FirebaseFirestore.instance);
 
-    i.registerLazySingleton<IHttpService>(() => HttpService(i.get()));
+    i.registerLazySingleton<IHttpService>(() => HttpService());
     i.registerLazySingleton<IQuestionsRepository>(
         () => QuestionsRepository(i.get()));
-    i.registerLazySingleton<IStorageService>(
-        () => StorageService(i.get(), i.get()));
+    i.registerLazySingleton<IStorageService>(() => StorageService(i.get()));
 
     i.registerLazySingleton(() => AuthCubit(i.get()));
 
     i.registerLazySingleton<IUserRepository>(() => UserRepository(i.get()));
     i.registerLazySingleton<IAuthRepository>(() => AuthRepository());
+    i.registerLazySingleton<INewsRepository>(() => NewsRepository(i.get()));
     // page cubits
     i.registerLazySingleton(() => BaseCubit(i.get()));
     i.registerLazySingleton(() => LoginCubit(i.get(), i.get()));
@@ -54,5 +57,6 @@ class ServiceLocator {
     i.registerLazySingleton(() => SettingsCubit());
     i.registerLazySingleton(() => ProfileCubit(i.get()));
     i.registerLazySingleton(() => RankingCubit(i.get()));
+    i.registerLazySingleton(() => HomeCubit(i.get()));
   }
 }

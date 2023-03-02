@@ -164,15 +164,28 @@ class _QuizPageState extends State<QuizPage> {
                                   child: Container(
                                     height: 68,
                                     decoration: BoxDecoration(
-                                      color: const Color.fromARGB(
-                                          255, 197, 157, 236),
-                                      border: Border.all(
-                                        color: Colors.black,
-                                        width: 0.8,
-                                        style: BorderStyle.solid,
-                                      ),
-                                      borderRadius: BorderRadius.circular(9),
-                                    ),
+                                        color: const Color.fromARGB(
+                                            255, 197, 157, 236),
+                                        border: Border.all(
+                                          color: const Color.fromARGB(
+                                              255, 155, 155, 155),
+                                          width: 0.8,
+                                          style: BorderStyle.solid,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            blurRadius: 10,
+                                            offset: Offset(4, 4),
+                                            color: Color.fromARGB(
+                                                255, 109, 109, 109),
+                                          ),
+                                          BoxShadow(
+                                              blurRadius: 20,
+                                              offset: Offset(0, 0),
+                                              color: Color.fromARGB(
+                                                  85, 255, 255, 255))
+                                        ]),
                                     child: Row(
                                       children: [
                                         const SizedBox(width: Spacing.l),

@@ -32,7 +32,8 @@ class CustomRanking extends StatelessWidget {
     return BlocBuilder<RankingCubit, RankingState>(
       bloc: GetIt.I.get<RankingCubit>(),
       builder: (context, state) {
-        return Column(
+        return ListView(
+          shrinkWrap: true,
           children: [
             SizedBox(
               height: 300,
@@ -343,65 +344,64 @@ class CustomRanking extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            Expanded(
-              child: ListView.separated(
-                itemCount: state.users.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Row(
-                    children: [
-                      const SizedBox(width: Spacing.l),
-                      SizedBox(
-                        width: 25,
-                        height: 20,
-                        child: Text(
-                          (index + 1).toString(),
-                          style: GoogleFonts.lato(fontSize: 20),
-                        ),
+            ListView.separated(
+              shrinkWrap: true,
+              itemCount: state.users.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Row(
+                  children: [
+                    const SizedBox(width: Spacing.l),
+                    SizedBox(
+                      width: 25,
+                      height: 20,
+                      child: Text(
+                        (index + 1).toString(),
+                        style: GoogleFonts.lato(fontSize: 20),
                       ),
-                      const SizedBox(width: Spacing.xs),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(state.users[index].name.toString()),
-                            Padding(
-                              padding: const EdgeInsets.only(right: Spacing.l),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: 12,
-                                    height: 12,
-                                    child: LinearGradientMask(
-                                      child: Image.asset(
-                                        'assets/icons/points_icon.png',
-                                      ),
+                    ),
+                    const SizedBox(width: Spacing.xs),
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(state.users[index].name.toString()),
+                          Padding(
+                            padding: const EdgeInsets.only(right: Spacing.l),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 12,
+                                  height: 12,
+                                  child: LinearGradientMask(
+                                    child: Image.asset(
+                                      'assets/icons/points_icon.png',
                                     ),
                                   ),
-                                  const SizedBox(width: 20),
-                                  SizedBox(
-                                    width: 25,
-                                    height: 20,
-                                    child: Text(
-                                      state.users[index].points.toString(),
-                                    ),
+                                ),
+                                const SizedBox(width: 20),
+                                SizedBox(
+                                  width: 25,
+                                  height: 20,
+                                  child: Text(
+                                    state.users[index].points.toString(),
                                   ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
                       ),
-                    ],
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) => Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 20,
-                    left: Spacing.l,
-                    right: Spacing.l,
-                  ),
-                  child: Divider(color: Colors.black.withOpacity(0.7)),
+                    ),
+                  ],
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) => Padding(
+                padding: const EdgeInsets.only(
+                  bottom: 20,
+                  left: Spacing.l,
+                  right: Spacing.l,
                 ),
+                child: Divider(color: Colors.black.withOpacity(0.7)),
               ),
             ),
           ],

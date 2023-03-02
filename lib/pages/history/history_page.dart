@@ -48,18 +48,18 @@ class _HistoryPageState extends State<HistoryPage> {
                         height: 75,
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 197, 157, 236),
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: Spacing.s,
-                                  right: Spacing.s,
-                                  top: Spacing.xs),
-                              child: Row(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            top: Spacing.xs,
+                            left: Spacing.s,
+                            right: Spacing.s,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
@@ -81,19 +81,30 @@ class _HistoryPageState extends State<HistoryPage> {
                                   ),
                                 ],
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: Spacing.s,
-                                right: Spacing.s,
-                                top: Spacing.s,
-                                bottom: Spacing.xs,
-                              ),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
+                              Padding(
+                                padding: const EdgeInsets.only(top: Spacing.m),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: state.historyQuestions[index]
+                                                      .question.result ==
+                                                  state.historyQuestions[index]
+                                                      .userRsult
+                                              ? Colors.green.shade800
+                                              : Colors.red,
+                                        ),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Icon(
+                                        state.historyQuestions[index].question
+                                                    .result ==
+                                                state.historyQuestions[index]
+                                                    .userRsult
+                                            ? Icons.check
+                                            : Icons.close,
+                                        size: 12,
                                         color: state.historyQuestions[index]
                                                     .question.result ==
                                                 state.historyQuestions[index]
@@ -101,48 +112,32 @@ class _HistoryPageState extends State<HistoryPage> {
                                             ? Colors.green.shade800
                                             : Colors.red,
                                       ),
-                                      shape: BoxShape.circle,
                                     ),
-                                    child: Icon(
+                                    const SizedBox(width: Spacing.xs),
+                                    Text(
                                       state.historyQuestions[index].question
                                                   .result ==
                                               state.historyQuestions[index]
                                                   .userRsult
-                                          ? Icons.check
-                                          : Icons.close,
-                                      size: 12,
-                                      color: state.historyQuestions[index]
-                                                  .question.result ==
-                                              state.historyQuestions[index]
-                                                  .userRsult
-                                          ? Colors.green.shade800
-                                          : Colors.red,
+                                          ? "Acertou"
+                                          : "Errou",
+                                      style: GoogleFonts.lato(
+                                        fontSize: 12,
+                                        letterSpacing: 4,
+                                        color: state.historyQuestions[index]
+                                                    .question.result ==
+                                                state.historyQuestions[index]
+                                                    .userRsult
+                                            ? Colors.green.shade800
+                                            : Colors.red,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(width: Spacing.xs),
-                                  Text(
-                                    state.historyQuestions[index].question
-                                                .result ==
-                                            state.historyQuestions[index]
-                                                .userRsult
-                                        ? "Acertou"
-                                        : "Errou",
-                                    style: GoogleFonts.lato(
-                                      fontSize: 12,
-                                      letterSpacing: 4,
-                                      color: state.historyQuestions[index]
-                                                  .question.result ==
-                                              state.historyQuestions[index]
-                                                  .userRsult
-                                          ? Colors.green.shade800
-                                          : Colors.red,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),

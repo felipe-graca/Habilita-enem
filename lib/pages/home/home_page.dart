@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habilita_enem/pages/home/home_cubit.dart';
 import 'package:habilita_enem/shared/spacing.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,6 +12,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final homeCubit = GetIt.I.get<HomeCubit>();
+
+  @override
+  void initState() {
+    homeCubit.init();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
