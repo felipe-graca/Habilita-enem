@@ -6,9 +6,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habilita_enem/core/bloc/auth/auth_cubit.dart';
 import 'package:habilita_enem/core/components/base_page/base_cubit.dart';
 import 'package:habilita_enem/core/routes/app_router.dart';
+import 'package:habilita_enem/pages/game/game_page.dart';
+
 import 'package:habilita_enem/pages/history/history_page.dart';
 import 'package:habilita_enem/pages/home/home_page.dart';
-import 'package:habilita_enem/pages/quiz/quiz_page.dart';
+
 import 'package:habilita_enem/pages/ranking/ranking_page.dart';
 import 'package:habilita_enem/shared/componentes/linear_gradient.dart';
 import 'package:habilita_enem/shared/spacing.dart';
@@ -82,7 +84,7 @@ class __BodyState extends State<_Body> with AutomaticKeepAliveClientMixin {
 
     final pages = <Widget>[
       const HomePage(),
-      const QuizPage(),
+      const GamePage(),
       const RankingPage(),
       const HistoryPage(),
     ];
@@ -98,7 +100,7 @@ class __BodyState extends State<_Body> with AutomaticKeepAliveClientMixin {
             height: mediaHeight - state.heightPage,
             padding: EdgeInsets.zero,
             decoration: const BoxDecoration(
-              color: Color(0xFFD9C1F0),
+              color: Color(0xFFEDE9F8),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black,
@@ -128,7 +130,7 @@ class __BodyState extends State<_Body> with AutomaticKeepAliveClientMixin {
               children: [
                 AnimatedOpacity(
                   duration: const Duration(milliseconds: 800),
-                  opacity: state.heightPage == 120 ? 1 : 0,
+                  opacity: state.heightPage == 100 ? 1 : 0,
                   child: SizedBox(
                     width: double.maxFinite,
                     child: ExpandablePageView.builder(
@@ -149,7 +151,7 @@ class __BodyState extends State<_Body> with AutomaticKeepAliveClientMixin {
                     visible: state.menuIsOpen,
                     child: AnimatedOpacity(
                       duration: const Duration(milliseconds: 800),
-                      opacity: state.heightPage == 120 ? 0 : 1,
+                      opacity: state.heightPage == 100 ? 0 : 1,
                       child: Container(
                         decoration: const BoxDecoration(
                           color: Color(0XFFDBC7EE),
@@ -292,7 +294,7 @@ class HeaderMenu extends StatelessWidget {
       bloc: baseCubit,
       builder: (context, state) {
         return SizedBox(
-          height: state.menuIsOpen ? (mediaHeight - (mediaHeight * 0.14)) : 120,
+          height: state.menuIsOpen ? (mediaHeight - (mediaHeight * 0.14)) : 100,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

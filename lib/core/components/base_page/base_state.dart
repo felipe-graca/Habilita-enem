@@ -8,7 +8,7 @@ class BaseState extends Equatable {
 
   const BaseState({
     this.menuIsOpen = false,
-    this.heightPage = 120,
+    this.heightPage = 100,
     this.namePage = 'INICIO',
     this.currentIndexPage = 0,
   });

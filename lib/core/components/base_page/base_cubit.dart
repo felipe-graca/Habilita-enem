@@ -43,7 +43,7 @@ class BaseCubit extends Cubit<BaseState> {
               changeName('HOME');
               break;
             case 1:
-              changeName('QUIZ');
+              changeName('GAME - QUIZ');
               break;
             case 2:
               changeName('RANKING');
@@ -83,7 +83,7 @@ class BaseCubit extends Cubit<BaseState> {
   }
 
   void emitMenuIsOpen() {
-    emit(state.copyWith(menuIsOpen: !state.menuIsOpen, heightPage: 120));
+    emit(state.copyWith(menuIsOpen: !state.menuIsOpen, heightPage: 100));
   }
 
   Future<void> menuController(GlobalKey widgetKey) async {
