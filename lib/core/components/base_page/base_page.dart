@@ -1,6 +1,6 @@
 import 'package:expandable_page_view/expandable_page_view.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habilita_enem/core/bloc/auth/auth_cubit.dart';
@@ -135,8 +135,7 @@ class __BodyState extends State<_Body> with AutomaticKeepAliveClientMixin {
                     width: double.maxFinite,
                     child: ExpandablePageView.builder(
                       itemCount: pages.length,
-                      physics: const NeverScrollableScrollPhysics(
-                          parent: AlwaysScrollableScrollPhysics()),
+                      physics: const NeverScrollableScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                       scrollDirection: Axis.vertical,
                       controller: baseCubit.pageController,
                       itemBuilder: (context, index) {
@@ -179,8 +178,7 @@ class __BodyState extends State<_Body> with AutomaticKeepAliveClientMixin {
                                 builder: (context, state) {
                                   return Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         state.userModel.name.toUpperCase(),
@@ -222,18 +220,15 @@ class __BodyState extends State<_Body> with AutomaticKeepAliveClientMixin {
                               ),
                               Expanded(
                                 child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(right: Spacing.l),
+                                  padding: const EdgeInsets.only(right: Spacing.l),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       InkWell(
                                         onTap: () async {
-                                          navigator
-                                              .pushNamed(AppRouter.settings);
+                                          navigator.pushNamed(AppRouter.settings);
                                         },
-                                        child: const Icon(Icons.settings,
-                                            size: 40),
+                                        child: const Icon(Icons.settings, size: 40),
                                       ),
                                     ],
                                   ),
@@ -307,9 +302,7 @@ class HeaderMenu extends StatelessWidget {
                     child: InkWell(
                       onTap: onTap,
                       child: Icon(
-                        state.menuIsOpen
-                            ? Icons.keyboard_arrow_up
-                            : Icons.keyboard_arrow_down,
+                        state.menuIsOpen ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
                         color: Colors.white,
                         size: 50,
                       ),
@@ -352,8 +345,7 @@ class HeaderMenu extends StatelessWidget {
                           ...menuItems.map((e) {
                             return InkWell(
                               onTap: () {
-                                baseCubit.pageController
-                                    .jumpToPage(menuItems.indexOf(e));
+                                baseCubit.pageController.jumpToPage(menuItems.indexOf(e));
                                 baseCubit.emitMenuIsOpen();
                               },
                               child: Container(
